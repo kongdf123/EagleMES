@@ -11,5 +11,6 @@ namespace EagleMES.Api.Data
         }
 
         public DbSet<WorkOrder> WorkOrders => Set<WorkOrder>();
+        public DbSet<SysUser> Users => Set<SysUser>();
     }
 }

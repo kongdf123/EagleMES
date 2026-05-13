@@ -41,3 +41,6 @@ INSERT INTO WorkOrders (OrderNo, ProductCode, Quantity, Status)
 VALUES
 ('WO-1001', 'P-AX01', 100, 'Pending'),
 ('WO-1002', 'P-BX02', 200, 'Running');
+
+INSERT INTO Users (Username, PasswordHash, Role)
+VALUES ('admin', 'admin123', 'Admin');

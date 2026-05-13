@@ -19,7 +19,7 @@ namespace EagleMES.Api.Controllers
         }
 
         // GET: api/workorders
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<WorkOrder>>> GetAll()
         {
             var workOrders = await _context.WorkOrders
@@ -47,12 +47,12 @@ namespace EagleMES.Api.Controllers
         }
 
         // GET: api/<WorkOrdersController>
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var data = await _context.WorkOrders.ToListAsync();
-            return Ok(data);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Get()
+        //{
+        //    var data = await _context.WorkOrders.ToListAsync();
+        //    return Ok(data);
+        //}
         //[HttpGet]
         //public IEnumerable<string> Get()
         //{
@@ -112,15 +112,15 @@ namespace EagleMES.Api.Controllers
         //}
 
         // PUT api/<WorkOrdersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
-        // DELETE api/<WorkOrdersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<WorkOrdersController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

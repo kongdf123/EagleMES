@@ -1,4 +1,5 @@
 ﻿using EagleMES.Api.Data;
+using EagleMES.Api.DTOs;
 using EagleMES.Api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -74,10 +75,10 @@ namespace EagleMES.Api.Controllers
         //  "status": "Pending"
         //}
         [HttpPost]
-        public async Task<ActionResult<WorkOrder>> Create(WorkOrder workOrder)
+        public async Task<ActionResult<WorkOrder>> Create(CreateWorkOrderRequest request)
         {
             // 简单校验
-            if (string.IsNullOrWhiteSpace(workOrder.OrderNo))
+            if (string.IsNullOrWhiteSpace(request.OrderNo))
             {
                 return BadRequest(new
                 {
@@ -85,7 +86,7 @@ namespace EagleMES.Api.Controllers
                 });
             }
 
-            if (string.IsNullOrWhiteSpace(workOrder.ProductCode))
+            if (string.IsNullOrWhiteSpace(request.ProductCode))
             {
                 return BadRequest(new
                 {
@@ -93,8 +94,14 @@ namespace EagleMES.Api.Controllers
                 });
             }
 
-            workOrder.Status ??= "Pending";
-            workOrder.StartTime ??= DateTime.UtcNow;
+            var workOrder = new WorkOrder
+            {
+                OrderNo = request.OrderNo,
+                ProductCode = request.ProductCode,
+                Quantity = request.Quantity,
+                Status = "Pending",
+                StartTime = DateTime.UtcNow
+            }; 
 
             _context.WorkOrders.Add(workOrder);
             await _context.SaveChangesAsync();

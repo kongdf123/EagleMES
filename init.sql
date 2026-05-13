@@ -44,3 +44,8 @@ VALUES
 
 INSERT INTO Users (Username, PasswordHash, Role)
 VALUES ('admin', 'admin123', 'Admin');
+
+INSERT INTO Inventories (MaterialCode, Quantity, Location)
+VALUES
+('MAT-001', 500, 'WH-A'),
+('MAT-002', 800, 'WH-B');

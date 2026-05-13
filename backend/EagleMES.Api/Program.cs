@@ -41,9 +41,14 @@ namespace EagleMES.Api
                             "http://127.0.0.1:5173"
                         )
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
+
+            // SignalR
+            builder.Services.AddSignalR();
+            builder.Services.AddHostedService<BackgroundServices.DeviceSimulationService>();
 
             // Database
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -89,6 +94,7 @@ namespace EagleMES.Api
             app.UseAuthorization();
 
             app.MapControllers();
+            app.MapHub<Hubs.DeviceHub>("/devicehub");
 
             app.Run();
         }

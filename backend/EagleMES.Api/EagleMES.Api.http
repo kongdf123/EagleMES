@@ -1,0 +1,6 @@
+@EagleMES.Api_HostAddress = http://localhost:5171
+
+GET {{EagleMES.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

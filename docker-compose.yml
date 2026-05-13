@@ -1,0 +1,36 @@
+# version: '3.9'
+
+services:
+  eaglemes-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: eaglemes-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - eaglemes-sqlserver-data:/var/opt/mssql
+    networks:
+      - eaglemes-network
+
+  eaglemes-api:
+    build:
+      context: .
+      dockerfile: backend/EagleMES.Api/Dockerfile
+    container_name: eaglemes-api
+    ports:
+      - "5001:8080"
+    depends_on:
+      - eaglemes-sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=eaglemes-sqlserver;Database=EagleMes;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
+    networks:
+      - eaglemes-network
+
+volumes:
+  eaglemes-sqlserver-data:
+
+networks:
+  eaglemes-network:

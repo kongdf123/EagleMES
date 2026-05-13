@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{28AE0619-6E03-4687-86C0-923D5D3A2A88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simulator", "simulator", "{6820C5C4-BDE0-41C0-8B13-443E7BCB6F6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{95486BA4-9AC3-473A-A4CD-91DFD147D98A}"
+	ProjectSection(SolutionItems) = preProject
+		init.sql = init.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A3238633-615A-45C4-A288-ABDA028C0227}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "worker", "worker", "{E650565E-D9C4-4273-BA31-0AAC754889E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EagleMES.Api", "backend\EagleMES.Api\EagleMES.Api.csproj", "{69AC3601-C7D9-4E75-B012-244D9ABA4CCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E5DF7CC-120A-479F-A8E3-B0E9F979F2FA}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69AC3601-C7D9-4E75-B012-244D9ABA4CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69AC3601-C7D9-4E75-B012-244D9ABA4CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69AC3601-C7D9-4E75-B012-244D9ABA4CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69AC3601-C7D9-4E75-B012-244D9ABA4CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69AC3601-C7D9-4E75-B012-244D9ABA4CCF} = {28AE0619-6E03-4687-86C0-923D5D3A2A88}
+	EndGlobalSection
+EndGlobal

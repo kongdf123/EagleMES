@@ -31,9 +31,10 @@ CREATE TABLE Inventories (
 CREATE TABLE Devices (
     Id INT PRIMARY KEY IDENTITY(1,1),
     DeviceCode NVARCHAR(50) NOT NULL,
-    Name NVARCHAR(100) NOT NULL,
+    DeviceName NVARCHAR(100) NOT NULL,
     Status NVARCHAR(20) NOT NULL,
-    LastHeartbeat DATETIME NULL
+    Temperature FLOAT NOT NULL,
+    LastUpdated DATETIME NOT NULL
 );
 
 
@@ -49,3 +50,10 @@ INSERT INTO Inventories (MaterialCode, Quantity, Location)
 VALUES
 ('MAT-001', 500, 'WH-A'),
 ('MAT-002', 800, 'WH-B');
+
+INSERT INTO Devices (DeviceCode, DeviceName, Status, Temperature, LastUpdated)
+VALUES
+('PLC-01', 'Assembly Line PLC', 'Running', 36.5, GETDATE()),
+('PLC-02', 'Packing PLC', 'Running', 34.2, GETDATE()),
+('SCN-01', 'Barcode Scanner', 'Idle', 29.1, GETDATE()),
+('RFID-01', 'RFID Gateway', 'Running', 31.8, GETDATE());

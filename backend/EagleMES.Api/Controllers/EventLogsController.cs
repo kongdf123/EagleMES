@@ -1,4 +1,5 @@
 ﻿using EagleMES.Api.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace EagleMES.Api.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> Get()
         {

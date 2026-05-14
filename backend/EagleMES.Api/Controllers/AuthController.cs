@@ -44,7 +44,7 @@ namespace EagleMES.Api.Controllers
             return Ok(new
             {
                 token,
-                usename = user.Username,
+                username = user.Username,
                 role = user.Role
             });
         }

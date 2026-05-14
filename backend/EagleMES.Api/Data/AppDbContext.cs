@@ -14,5 +14,6 @@ namespace EagleMES.Api.Data
         public DbSet<SysUser> Users => Set<SysUser>();
         public DbSet<Inventory> Inventories => Set<Inventory>();
         public DbSet<Device> Devices => Set<Device>();
+        public DbSet<EventLog> EventLogs => Set<EventLog>();
     }
 }

@@ -21,14 +21,33 @@ services:
     container_name: eaglemes-api
     ports:
       - "5001:8080"
-    depends_on:
-      - eaglemes-sqlserver
+    depends_on: 
+        eaglemes-sqlserver:
+          condition: service_started
+        rabbitmq:
+          condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080 
+      RABBITMQ__HOSTNAME: rabbitmq
       ConnectionStrings__DefaultConnection: "Server=eaglemes-sqlserver;Database=EagleMes;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
     networks:
       - eaglemes-network
 
+  rabbitmq:
+      image: rabbitmq:3-management
+      container_name: rabbitmq
+      restart: unless-stopped
+      ports:
+        - "5672:5672"
+        - "15672:15672"
+      healthcheck:
+        test: ["CMD", "rabbitmq-diagnostics", "ping"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+      networks:
+        - eaglemes-network
 volumes:
   eaglemes-sqlserver-data:
 

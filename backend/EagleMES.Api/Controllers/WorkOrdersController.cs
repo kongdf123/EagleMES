@@ -1,6 +1,7 @@
 ﻿using EagleMES.Api.Data;
 using EagleMES.Api.DTOs;
 using EagleMES.Api.Entities;
+using EagleMES.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,14 @@ namespace EagleMES.Api.Controllers
     public class WorkOrdersController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly RabbitMqPublisher _publisher; 
+        private readonly ILogger<WorkOrdersController> _logger;
 
-        public WorkOrdersController(AppDbContext context)
+        public WorkOrdersController(AppDbContext context,RabbitMqPublisher publisher, ILogger<WorkOrdersController> logger)
         {
             _context = context;
+            _publisher = publisher;
+            _logger = logger;
         }
 
         // GET: api/workorders
@@ -105,6 +110,23 @@ namespace EagleMES.Api.Controllers
 
             _context.WorkOrders.Add(workOrder);
             await _context.SaveChangesAsync();
+            try
+            {
+                await _publisher.PublishWorkOrderEventAsync(new WorkOrderCreatedEvent
+                {
+                    Id = workOrder.Id,
+                    OrderNo = workOrder.OrderNo,
+                    ProductCode = request.ProductCode,
+                    Quantity = request.Quantity,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex,
+                    "RabbitMQ publish failed for work order {OrderNo}",
+                    workOrder.OrderNo);
+            }
 
             return CreatedAtAction(
                 nameof(GetById),

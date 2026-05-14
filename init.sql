@@ -37,6 +37,12 @@ CREATE TABLE Devices (
     LastUpdated DATETIME NOT NULL
 );
 
+CREATE TABLE EventLogs (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    EventType NVARCHAR(50),
+    Message NVARCHAR(500),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 
 INSERT INTO WorkOrders (OrderNo, ProductCode, Quantity, Status)
 VALUES

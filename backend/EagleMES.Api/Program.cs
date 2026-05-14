@@ -71,6 +71,9 @@ namespace EagleMES.Api
                     };
                 });
 
+            builder.Services.AddSingleton<Services.RabbitMqPublisher>();
+            builder.Services.AddHostedService<BackgroundServices.WorkOrderCreatedConsumer>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -44,6 +44,25 @@ CREATE TABLE EventLogs (
     CreatedAt DATETIME DEFAULT GETDATE()
 );
 
+CREATE TABLE Suppliers (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    SupplierCode NVARCHAR(50) NOT NULL,
+    SupplierName NVARCHAR(100) NOT NULL,
+    ContactPerson NVARCHAR(50),
+    Phone NVARCHAR(30),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE PurchaseOrders (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    PoNo NVARCHAR(50) NOT NULL,
+    SupplierId INT NOT NULL,
+    MaterialName NVARCHAR(100) NOT NULL,
+    Quantity INT NOT NULL,
+    Status NVARCHAR(30) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
 INSERT INTO WorkOrders (OrderNo, ProductCode, Quantity, Status)
 VALUES
 ('WO-1001', 'P-AX01', 100, 'Pending'),
@@ -63,3 +82,9 @@ VALUES
 ('PLC-02', 'Packing PLC', 'Running', 34.2, GETDATE()),
 ('SCN-01', 'Barcode Scanner', 'Idle', 29.1, GETDATE()),
 ('RFID-01', 'RFID Gateway', 'Running', 31.8, GETDATE());
+
+INSERT INTO Suppliers
+(SupplierCode, SupplierName, ContactPerson, Phone)
+VALUES
+('SUP001', 'Foxconn Parts', 'David', '13800138000'),
+('SUP002', 'Bosch Components', 'Alice', '13800138001');
